@@ -2,8 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class Phonebook {
     //hello?
@@ -29,9 +28,8 @@ public class Phonebook {
 
     public void saveToFile(){
         String addToFile = "";
-        try (FileWriter writer = new FileWriter("contacts.txt")){
-            ArrayList<String> contacts = getContacts();
-            for (String s : contacts) {
+        try (FileWriter writer = new FileWriter("contacts.txt")){\
+            for (String s : list.toString) {
                 addToFile += s + "\n";
             }
             writer.write(addToFile);
@@ -40,6 +38,17 @@ public class Phonebook {
 
         catch (IOException e){
             System.out.println("An error occurred while writing" + " to the file: " + e.getMessage());
+        }
+    }
+
+
+    public String findContact(String search){
+        int length = search.length();
+        for (int i = 0; i < list.length; i++){
+            if (list[i].getName().substring(0,length).equals(search))
+                System.out.print(list[i]);
+            else if (list[i].getNumber().substring(0,length).equals(search))
+                System.out.print(list[i]);
         }
     }
 }
