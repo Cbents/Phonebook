@@ -15,7 +15,7 @@ public class Phonebook {
             while (reader.hasNextLine()){
                 String next = reader.nextLine();
                 try {
-                    addContact(next);
+                    addContact(next.split(": ")[0], next.split(": ")[1]);
                 }
                 catch (ArrayIndexOutOfBoundsException e){
                     System.out.print("Not a valid contact.");
@@ -31,8 +31,7 @@ public class Phonebook {
     public void saveToFile(){
         String addToFile = "";
         try (FileWriter writer = new FileWriter("contacts.txt")){
-            ArrayList<String> contacts = getContacts();
-            for (String s : contacts) {
+            for (ContactCard s : phonebook) {
                 addToFile += s + "\n";
             }
             writer.write(addToFile);
@@ -54,6 +53,27 @@ public class Phonebook {
         for (int i = 0; i < phonebook.size(); i++){
             String forOut = String.format("%d: %s", i, phonebook.get(i).getName());
             System.out.println(forOut);
+        }
+    }
+
+    public void findContact(String search){
+        int length = search.length();
+        for (int i = 0; i < phonebook.size(); i++){
+            if (phonebook.get(i).getName().substring(0,length).equals(search))
+                System.out.println(phonebook.get(i).toString());
+            else if (phonebook.get(i).getNumber().substring(0,length).equals(search))
+                System.out.println(phonebook.get(i).toString());
+        }
+    }
+
+    public void deleteContact(String delete){
+        for (int i = 0; i < phonebook.size(); i++){
+            if (phonebook.get(i).getName().equals(delete) || phonebook.get(i).getNumber().equals(delete)) {
+                System.out.print("Deleted " + phonebook.get(i).toString() + " from contacts.");
+                phonebook.remove(i);
+                break;
+            }
+            else System.out.print("Contact not found.");
         }
     }
 }
