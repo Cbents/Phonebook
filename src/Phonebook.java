@@ -7,6 +7,51 @@ import java.util.Scanner;
 
 public class Phonebook {
     //hello?
+    void main() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Commands\n"+"1:Add\n"+"2:View\n"+"3:Remove\n"+"4:Find\n"+"5:Update\n"+"6:Exit");
+        int x = input.nextInt();
+        switch(x) {
+            case 1:
+                System.out.println("Name");
+                String j = input.next();
+                System.out.println("Number:");
+                int n = input.nextInt();
+                add(n);
+                // Add to phonebook;
+                break;
+            case 2:
+                System.out.println("Where?");
+                int p = input.nextInt();
+                //View at object at a point
+                break;
+            case 3:
+                System.out.println("Where");
+                int a = input.nextInt();
+                deleteContact(a);
+                break;
+            case 4:
+                System.out.println("Input");
+                String y = input.next();
+                //Find
+                findContact(y);
+                break;
+            case 5:
+                System.out.println("What's the name");
+                String b = input.next();
+                System.out.println("New name?");
+                String c = input.next();
+                System.out.println("New Number?");
+                String d = input.next();
+                editContact(b, c, d);
+                break;
+            case 6:
+                saveToFile();
+                System.exit(0);
+            default:
+                System.out.println("Invalid option");
+        }
+        }
 
 
     public void readFromFile(){
