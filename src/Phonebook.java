@@ -7,7 +7,7 @@ import java.util.*;
 public class Phonebook {
     //hello?
 
-
+    //old code
     public void readFromFile(){
         try (Scanner reader = new Scanner(new File("contacts.txt"))){
             while (reader.hasNextLine()){
