@@ -2,11 +2,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Phonebook {
-    //hello?
 
+    ArrayList<ContactCard> phonebook = new ArrayList<>();
 
     public void readFromFile(){
         try (Scanner reader = new Scanner(new File("contacts.txt"))){
