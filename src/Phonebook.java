@@ -15,7 +15,7 @@ public class Phonebook {
             while (reader.hasNextLine()){
                 String next = reader.nextLine();
                 try {
-                    addContact(next.split(": ")[0],next.split(": ")[1]);
+                    addContact(next);
                 }
                 catch (ArrayIndexOutOfBoundsException e){
                     System.out.print("Not a valid contact.");
@@ -31,7 +31,8 @@ public class Phonebook {
     public void saveToFile(){
         String addToFile = "";
         try (FileWriter writer = new FileWriter("contacts.txt")){
-            for (Contact s : list) {
+            ArrayList<String> contacts = getContacts();
+            for (String s : contacts) {
                 addToFile += s + "\n";
             }
             writer.write(addToFile);
@@ -43,24 +44,16 @@ public class Phonebook {
         }
     }
 
+    public void addContact(String name, String number){
+        ContactCard newContact = new ContactCard(name, number);
+        phonebook.add(newContact);
 
-    public void findContact(String search){
-        int length = search.length();
-        for (int i = 0; i < list.size(); i++){
-            if (list.get(i).getName().substring(0,length).equals(search))
-                System.out.println(list.get(i).toString());
-            else if (list.get(i).getNumber().substring(0,length).equals(search))
-                System.out.println(list.get(i).toString());
-        }
     }
 
-    public void deleteContact(String delete){
-        for (int i = 0; i < list.size(); i++){
-            if (list.get(i).getName().equals(delete) || list.get(i).getNumber().equals(delete)) {
-                System.out.print("Deleted " + list.get(i).toString() + " from contacts.");
-                list.remove(i);
-            }
-            else System.out.print("Contact not found.");
+    public void viewAllContacts(){
+        for (int i = 0; i < phonebook.size(); i++){
+            String forOut = String.format("%d: %s", i, phonebook.get(i).getName());
+            System.out.println(forOut);
         }
     }
 }
